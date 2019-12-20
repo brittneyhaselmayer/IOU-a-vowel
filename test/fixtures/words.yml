@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  word: MyString
+  correct_letter: MyString
+  partial_word: MyString
+
+two:
+  word: MyString
+  correct_letter: MyString
+  partial_word: MyString
