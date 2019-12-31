@@ -7,41 +7,46 @@ console.log("DOM is fully loaded");
         const gradeButton = document.getElementById("quiz-submit");
         
 
-        const nameForm = document.getElementById("name-form")
-        nameForm.addEventListener("submit", addingUsername )
-
+       const nameForm = document.getElementById("name-form")
+        nameForm.addEventListener("submit", addingUsername)
+       
+        
             function addingUsername(e) {
                 e.preventDefault();
+                let name= document.querySelector("input[name=name]").value
+                if (name.length === 0){
+                    alert("Please enter a username")
+                }
                 
-                const name = document.querySelector("input[name=name]").value;
-                
-                fetch("http://localhost:3000/users",{
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json" },
-                    body: JSON.stringify({name: name})
-                }).then( () => retrieveUser() )
+                    fetch("http://localhost:3000/users",{
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json" },
+                        body: JSON.stringify({name: name})
+                    }).then( () => retrieveUser() )
 
 
-                    let retrieveUser = () => {
-                        fetch("http://localhost:3000/users").then( response => response.json() ).then( newData => getUser(newData))
-                    }
+                        let retrieveUser = () => {
+                            fetch("http://localhost:3000/users").then( response => response.json() ).then( newData => getUser(newData))
+                        }
 
-                    let getUser = (newData) => {
-                        let currentUser = newData[newData.length -1]
-                        currentUserId = currentUser.id
+                        let getUser = (newData) => {
+                            let currentUser = newData[newData.length -1]
+                            currentUserId = currentUser.id
+                    
+                        }
+               
                 
-                    }
 
                 
             }
 
+           
 
 
-            
 
-        fetch("http://localhost:3000/words").then(resp => resp.json()).then((myJSON) => { shuffle(myJSON) })
+            fetch("http://localhost:3000/words").then(resp => resp.json()).then((myJSON) => { shuffle(myJSON) })
                 
            
             
@@ -112,22 +117,6 @@ console.log("DOM is fully loaded");
             }
 
                
-                
-
-               
-           
-
-                    
-                    
-
-                    
-
-
-               
-
-            
-
-            
             gradeButton.addEventListener("click", postScore, showGrade)
             
                function postScore(e){
