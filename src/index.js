@@ -4,6 +4,7 @@ console.log("DOM is fully loaded");
         let currentUserId;
         let count = [];
         let finalTally =0 ;
+        const gradeButton = document.getElementById("quiz-submit");
         
 
         const nameForm = document.getElementById("name-form")
@@ -38,76 +39,98 @@ console.log("DOM is fully loaded");
 
 
 
+            
 
+        fetch("http://localhost:3000/words").then(resp => resp.json()).then((myJSON) => { shuffle(myJSON) })
+                
+           
+            
+            function shuffle(object){
 
-        fetch("http://localhost:3000/words").then(resp => resp.json()).then((myJSON) => { getRandomQuestions(myJSON) })
+                let counter = object.length
 
-            let getRandomQuestions = function(JSON) {
-                let questionList = []
-                for (i = 0; i < 10; i++){
-                    let question = JSON[Math.floor(Math.random(10) * JSON.length)];
-                    questionList.push(question)
-                    
+                while (counter > 0){
+                    let index = Math.floor(Math.random()*counter)
+                    counter--
+
+                    let temp = object[counter]
+                    object[counter] = object[index]
+                    object[index] = temp    
                 }
+               let questionList= object.slice(0,10)
+               
+                
+                
+               questionList.forEach(q => {
+                    const questionContainer = document.getElementById("questions")
+                    const actualQuestion = document.createElement("h1")
+                    actualQuestion.innerText = "Add the correct vowel"
+                    questionContainer.appendChild(actualQuestion)
 
-                    questionList.forEach(q => {
-                        const questionContainer = document.getElementById("questions")
-                        const actualQuestion = document.createElement("h1")
-                        actualQuestion.innerText = "Add the correct vowel"
-                        questionContainer.appendChild(actualQuestion)
-
-                        const newWord = document.createElement("h2")
-                        newWord.innerText = q.partial_word
-                        
-                        questionContainer.appendChild(newWord)
-                        
-                        const aButton = document.createElement("button")
-                        aButton.innerHTML = "a"
-                        const eButton = document.createElement("button")
-                        eButton.innerHTML = "e"
-                        const iButton = document.createElement("button")
-                        iButton.innerHTML = "i"
-                        const oButton = document.createElement("button")
-                        oButton.innerHTML = "o"
-                        const uButton = document.createElement("button")
-                        uButton.innerHTML = "u"
-
-                        questionContainer.appendChild(aButton)
-                        questionContainer.appendChild(eButton)
-                        questionContainer.appendChild(iButton)
-                        questionContainer.appendChild(oButton)
-                        questionContainer.appendChild(uButton)
+                    const newWord = document.createElement("h2")
+                    newWord.innerText = q.partial_word
                     
+                    questionContainer.appendChild(newWord)
                     
-                        aButton.addEventListener("click", tally);
-                        eButton.addEventListener("click", tally);
-                        iButton.addEventListener("click", tally);
-                        oButton.addEventListener("click", tally);
-                        uButton.addEventListener("click", tally);                        
-                        
+                    const aButton = document.createElement("button")
+                    aButton.innerHTML = "a"
+                    const eButton = document.createElement("button")
+                    eButton.innerHTML = "e"
+                    const iButton = document.createElement("button")
+                    iButton.innerHTML = "i"
+                    const oButton = document.createElement("button")
+                    oButton.innerHTML = "o"
+                    const uButton = document.createElement("button")
+                    uButton.innerHTML = "u"
 
-
-                        function tally(j) {
-                            let clickedButton = j.target.innerHTML;
-                            if (clickedButton == q.correct_letter) {
-                                    finalTally++
-                            }  
-
-                        }    
+                    questionContainer.appendChild(aButton)
+                    questionContainer.appendChild(eButton)
+                    questionContainer.appendChild(iButton)
+                    questionContainer.appendChild(oButton)
+                    questionContainer.appendChild(uButton)
+                
+                
+                    aButton.addEventListener("click", tally);
+                    eButton.addEventListener("click", tally);
+                    iButton.addEventListener("click", tally);
+                    oButton.addEventListener("click", tally);
+                    uButton.addEventListener("click", tally);                        
                     
+
+
+                    function tally(j) {
+                        let clickedButton = j.target.innerHTML;
+                        if (clickedButton == q.correct_letter) {
+                                finalTally++
+                        }  
+
+                    }    
+            
+        
+
+                })
+            }
+
+               
                 
 
-                    })
+               
+           
+
+                    
+                    
+
+                    
 
 
                
 
-            }
-
-            let gradeButton = document.getElementById("quiz-submit")
-            gradeButton.addEventListener("click", dummy)
             
-               function dummy(e){
+
+            
+            gradeButton.addEventListener("click", postScore, showGrade)
+            
+               function postScore(e){
                     e.preventDefault
                     
                                         fetch("http://localhost:3000/scores", {
@@ -120,10 +143,32 @@ console.log("DOM is fully loaded");
                                                         score: finalTally,
                                                         user_id: currentUserId
                                                     })
-                                                })
+                                                }).then(()=>showGrade())
                                     
 
                 }
+
+                
+                
+
+
+                function showGrade(){
+                    fetch("http://localhost:3000/scores")
+                    .then(resp => resp.json())
+                    .then(x => renderGrade(x))
+
+                }
+                
+                function renderGrade(j){
+                    let score = document.getElementById("show_score")
+                    let lastScore = j[j.length -1].score
+                    score.innerText= lastScore
+                    
+                 }
+
+               
+
+
                            
             
 })

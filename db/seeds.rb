@@ -33,6 +33,7 @@ word18 = Word.create(word: "schadenfreude", correct_letter: "e", partial_word: "
 word19 = Word.create(word: "indigent", correct_letter: "e", partial_word: "indig_nt")
 word20 = Word.create(word: "scintillating", correct_letter: "i", partial_word: "scint_llating")
 
+
 score1 = Score.create(score: 5, user_id: 1)
 score2 = Score.create(score: 8, user_id: 2)
 score3 = Score.create(score: 2, user_id: 3)
