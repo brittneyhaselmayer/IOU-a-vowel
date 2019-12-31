@@ -30,7 +30,7 @@ console.log("DOM is fully loaded");
                     let getUser = (newData) => {
                         let currentUser = newData[newData.length -1]
                         currentUserId = currentUser.id
-                        console.log(currentUserId)
+                
                     }
 
                 
@@ -50,81 +50,81 @@ console.log("DOM is fully loaded");
                     
                 }
 
-                
+                    questionList.forEach(q => {
+                        const questionContainer = document.getElementById("questions")
+                        const actualQuestion = document.createElement("h1")
+                        actualQuestion.innerText = "Add the correct vowel"
+                        questionContainer.appendChild(actualQuestion)
 
-                questionList.forEach(q => {
-                    const questionContainer = document.getElementById("div2")
-                    const actualQuestion = document.createElement("h1")
-                    actualQuestion.innerText = "Add the correct vowel"
-                    questionContainer.appendChild(actualQuestion)
+                        const newWord = document.createElement("h2")
+                        newWord.innerText = q.partial_word
+                        
+                        questionContainer.appendChild(newWord)
+                        
+                        const aButton = document.createElement("button")
+                        aButton.innerHTML = "a"
+                        const eButton = document.createElement("button")
+                        eButton.innerHTML = "e"
+                        const iButton = document.createElement("button")
+                        iButton.innerHTML = "i"
+                        const oButton = document.createElement("button")
+                        oButton.innerHTML = "o"
+                        const uButton = document.createElement("button")
+                        uButton.innerHTML = "u"
 
-                    const newWord = document.createElement("h2")
-                    newWord.innerText = q.partial_word
+                        questionContainer.appendChild(aButton)
+                        questionContainer.appendChild(eButton)
+                        questionContainer.appendChild(iButton)
+                        questionContainer.appendChild(oButton)
+                        questionContainer.appendChild(uButton)
                     
-                    questionContainer.appendChild(newWord)
                     
-                    const aButton = document.createElement("button")
-                    aButton.innerHTML = "a"
-                    const eButton = document.createElement("button")
-                    eButton.innerHTML = "e"
-                    const iButton = document.createElement("button")
-                    iButton.innerHTML = "i"
-                    const oButton = document.createElement("button")
-                    oButton.innerHTML = "o"
-                    const uButton = document.createElement("button")
-                    uButton.innerHTML = "u"
-
-                    questionContainer.appendChild(aButton)
-                    questionContainer.appendChild(eButton)
-                    questionContainer.appendChild(iButton)
-                    questionContainer.appendChild(oButton)
-                    questionContainer.appendChild(uButton)
-                
-                
-                    aButton.addEventListener("click", tally);
-                    eButton.addEventListener("click", tally);
-                    iButton.addEventListener("click", tally);
-                    oButton.addEventListener("click", tally);
-                    uButton.addEventListener("click", tally);                        
-                    
+                        aButton.addEventListener("click", tally);
+                        eButton.addEventListener("click", tally);
+                        iButton.addEventListener("click", tally);
+                        oButton.addEventListener("click", tally);
+                        uButton.addEventListener("click", tally);                        
+                        
 
 
-                    function tally(j) {
-                        let clickedButton = j.target.innerHTML;
-                        if (clickedButton == q.correct_letter) {
-                                finalTally++
-                        }  
+                        function tally(j) {
+                            let clickedButton = j.target.innerHTML;
+                            if (clickedButton == q.correct_letter) {
+                                    finalTally++
+                            }  
 
-                    }    
+                        }    
                     
                 
 
-                })
+                    })
 
 
                
 
             }
 
-            // let gradeButton = document.getElementById("quiz-submit")
-            // gradeButton.addEventListener("click", () => dummy)
+            let gradeButton = document.getElementById("quiz-submit")
+            gradeButton.addEventListener("click", dummy)
             
-            //     let dummy = (e) => {
-            //         e.preventDefault
-            //         console.log("button clicked!")
-            //     }
-                            // fetch("http://localhost:3000/scores", {
-                            //         method: "POST",
-                            //         headers: {
-                            //             "Content-Type": "application/json",
-                            //             "Accept" : "application/json"
-                            //             },
-                            //             body: JSON.stringify({
-                            //                 score: finalTally,
-                            //                 user_id: currentUserId
-                            //             })
-                            //         })
-                            //         )
+               function dummy(e){
+                    e.preventDefault
+                    
+                                        fetch("http://localhost:3000/scores", {
+                                                method: "POST",
+                                                headers: {
+                                                    "Content-Type": "application/json",
+                                                    "Accept" : "application/json"
+                                                    },
+                                                    body: JSON.stringify({
+                                                        score: finalTally,
+                                                        user_id: currentUserId
+                                                    })
+                                                })
+                                    
+
+                }
+                           
             
 })
 
