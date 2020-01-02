@@ -1,20 +1,29 @@
 <!DOCTYPE html>
     <header>
-
+        <title>IOU A Vowel</title>
         <script src="./index.js"></script>
+        <link rel="stylesheet" href="index.css">
     </header>
-    <h1>IOU A Vowel!</h1>
+
+    
     <body>
      <main> 
-        <div id="div1">
+      <div id="div1" class="page active">
+          <h1>IOU A Vowel!</h1>
           <form method="post" id="name-form">
-            <h3> Enter User Name:</h3>
+            <h3> Enter a username:</h3>
             <input type="text" name="name">
             <input type="submit">
           </form> 
-        </div>
+
+          <h3>After submitting your user name, play IOU A Vowel!</h3>
+          <button id="game" onclick="playGame()">Click me</button>
+          
+      </div>
         
-        <div id ="div2" class="container">
+        
+
+        <div id ="div2" class="page">
             <div id = "questions">
             </div>
             <div>
@@ -22,7 +31,7 @@
              </div>    
         </div>
 
-        <div id="div3">
+        <div id="div3" class="page">
           <h1>Score:</h1>
           <div id="show_score">
           </div>  

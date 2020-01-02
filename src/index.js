@@ -42,6 +42,25 @@ console.log("DOM is fully loaded");
                 
             }
 
+    const gameButton = document.getElementById("game")
+    gameButton.addEventListener("click", firstMove)
+
+    function firstMove() {
+
+            let x = document.getElementById("div1")
+            let y = document.getElementById("div2")
+
+            if (x) {
+
+                if (x.style.display == "none") {
+                    x.style.display = "block";
+                    y.style.display = "none"
+                } else {
+                    x.style.display = "none";
+                    y.style.block ="block"
+                } 
+            }    
+    }
            
 
 
