@@ -2,9 +2,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
 console.log("DOM is fully loaded");
 
         let currentUserId;
-        let count = [];
         let finalTally =0 ;
         const gradeButton = document.getElementById("quiz-submit");
+        const endGame = document.getElementById("final")
+        let score = document.getElementById("show_score")
+        let questionList
+        const questionContainer = document.getElementById("questions")
         
 
        const nameForm = document.getElementById("name-form")
@@ -43,35 +46,41 @@ console.log("DOM is fully loaded");
             }
 
     const gameButton = document.getElementById("game")
+    gameButton.addEventListener("click", words)
     gameButton.addEventListener("click", firstMove)
-
     function firstMove() {
 
             let x = document.getElementById("div1")
             let y = document.getElementById("div2")
+           
 
             if (x) {
 
                 if (x.style.display == "none") {
                     x.style.display = "block";
                     y.style.display = "none"
-                } else {
-                    x.style.display = "none";
-                    y.style.block ="block"
                 } 
-            }    
+                else {
+                    x.style.display = "none";
+                    y.style.display ="block"
+                } }
+               
     }
            
 
 
 
-            fetch("http://localhost:3000/words").then(resp => resp.json()).then((myJSON) => { shuffle(myJSON) })
-                
            
-            
+        function words() {       
+            fetch("http://localhost:3000/words")
+            .then(resp => resp.json())
+            .then((myJSON) =>  shuffle(myJSON) )
+        }   
+        
             function shuffle(object){
-
+                console.log(object)
                 let counter = object.length
+                
 
                 while (counter > 0){
                     let index = Math.floor(Math.random()*counter)
@@ -81,12 +90,12 @@ console.log("DOM is fully loaded");
                     object[counter] = object[index]
                     object[index] = temp    
                 }
-               let questionList= object.slice(0,10)
+               questionList= object.slice(0,10)
                
                 
                 
                questionList.forEach(q => {
-                    const questionContainer = document.getElementById("questions")
+                    // const questionContainer = document.getElementById("questions")
                     const actualQuestion = document.createElement("h1")
                     actualQuestion.innerText = "Add the correct vowel"
                     questionContainer.appendChild(actualQuestion)
@@ -168,15 +177,41 @@ console.log("DOM is fully loaded");
                 }
                 
                 function renderGrade(j){
-                    let score = document.getElementById("show_score")
+                    // let score = document.getElementById("show_score")
                     let lastScore = j[j.length -1].score
                     score.innerText= lastScore
                     
+                }
+
+
+                 endGame.addEventListener("click", clearObject)
+                 endGame.addEventListener("click", startPage)
+
+
+                 function startPage(){
+                    let x = document.getElementById("div2")
+                    let y = document.getElementById("div1")
+                    finalTally = 0
+                    score.innerHTML=0
+                
+                    if (x) {
+
+                        if (x.style.display == "none") {
+                            x.style.display = "block";
+                            y.style.display = "none"
+                        } 
+                        else {
+                            x.style.display = "none";
+                            y.style.display ="block"
+                        } 
+                    }
                  }
 
-               
+                 function clearObject(){
+                    questionContainer.innerHTML=""
+                 }
 
-
+    
                            
             
 })

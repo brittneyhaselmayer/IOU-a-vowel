@@ -5,16 +5,26 @@ html{
 }
 
 
-.page{
+#div2{
     display: none;
     width: 100%;
     min-height: 100%;
-    position: fixed;
+    /* position: fixed; */
+    padding: 1rem 2rem;
+}
+
+#div3{
+    display: none;
+    width: 100%;
+    min-height: 100%;
+    /* position: fixed; */
     padding: 1rem 2rem;
 }
 
 
-.active{
+
+
+/* .active{
     display: block
-}
+} */
 
