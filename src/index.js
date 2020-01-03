@@ -6,13 +6,18 @@ console.log("DOM is fully loaded");
         const gradeButton = document.getElementById("quiz-submit");
         const endGame = document.getElementById("final")
         let score = document.getElementById("show_score")
+            score.setAttribute("class", "zeescore")
         let questionList
         const questionContainer = document.getElementById("questions")
+        let scoreText = document.getElementById("score-text")
+        let welcome = document.getElementById("welcome")
+       
         
 
        const nameForm = document.getElementById("name-form")
         nameForm.addEventListener("submit", addingUsername)
-       
+        nameForm.addEventListener("submit", welcomeUser)
+      
         
             function addingUsername(e) {
                 e.preventDefault();
@@ -39,11 +44,21 @@ console.log("DOM is fully loaded");
                             currentUserId = currentUser.id
                     
                         }
-               
-                
-
                 
             }
+
+            function welcomeUser(e){
+                e.preventDefault()
+                let name= document.querySelector("input[name=name]").value
+                // let welcome = document.getElementById("welcome")
+                welcome.innerHTML= `Welcome, ${name}!`
+                document.getElementById("username").value = ""
+               
+            }
+
+
+            
+
 
     const gameButton = document.getElementById("game")
     gameButton.addEventListener("click", words)
@@ -78,7 +93,7 @@ console.log("DOM is fully loaded");
         }   
         
             function shuffle(object){
-                console.log(object)
+              
                 let counter = object.length
                 
 
@@ -96,11 +111,12 @@ console.log("DOM is fully loaded");
                 
                questionList.forEach(q => {
                     // const questionContainer = document.getElementById("questions")
-                    const actualQuestion = document.createElement("h1")
-                    actualQuestion.innerText = "Add the correct vowel"
+                    const actualQuestion = document.createElement("h2")
+                    actualQuestion.innerText = 'A E I O U?'
                     questionContainer.appendChild(actualQuestion)
 
-                    const newWord = document.createElement("h2")
+                    const newWord = document.createElement("h1")
+                          newWord.setAttribute("class", "wordColor")
                     newWord.innerText = q.partial_word
                     
                     questionContainer.appendChild(newWord)
@@ -133,9 +149,16 @@ console.log("DOM is fully loaded");
 
                     function tally(j) {
                         let clickedButton = j.target.innerHTML;
-                        if (clickedButton == q.correct_letter) {
+                         if (clickedButton == q.correct_letter) {
                                 finalTally++
                         }  
+
+                        j.target.style.backgroundColor = "white"
+
+                       
+                      
+
+
 
                     }    
             
@@ -180,8 +203,20 @@ console.log("DOM is fully loaded");
                     // let score = document.getElementById("show_score")
                     let lastScore = j[j.length -1].score
                     score.innerText= lastScore
-                    
+
+
+
+                    if (lastScore == 10){
+                        scoreText.innerHTML="Congrats! 10 out of 10!"
+                        } else if (lastScore < 10 && lastScore> 6){
+                            scoreText.innerHTML="Good job! Play again to master your spelling skills."
+                        } else {
+                            scoreText.innerHTML="Close, but no cigar! Play again to improve your spelling skills. "
+                        }
                 }
+
+
+               
 
 
                  endGame.addEventListener("click", clearObject)
@@ -193,6 +228,8 @@ console.log("DOM is fully loaded");
                     let y = document.getElementById("div1")
                     finalTally = 0
                     score.innerHTML=0
+                    scoreText.innerHTML=""
+                    welcome.innerHTML= ""
                 
                     if (x) {
 

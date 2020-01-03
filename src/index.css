@@ -1,7 +1,21 @@
 html{
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.6;
-    font-family: sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body{
+    background-color: rgb(81, 126, 111);
+    color: rgb(201, 138, 87);
+    text-align: center;
+    
+}
+h1{
+    font-size: 55px;
+}
+
+#welcome {
+    color: rgb(201, 108, 22);
 }
 
 
@@ -9,22 +23,31 @@ html{
     display: none;
     width: 100%;
     min-height: 100%;
-    /* position: fixed; */
     padding: 1rem 2rem;
 }
+button{
+    background-color: rgb(4, 59, 52);
+    border-radius: 12px;
+    font-size: 20px;
+    padding: 10px 20px ;
+    margin: 0px 10px;
+    color: rgb(212, 176, 159)
+   
+   
+}
+.zeescore{
+    font-size: 50px;
+}
 
-#div3{
-    display: none;
-    width: 100%;
-    min-height: 100%;
-    /* position: fixed; */
-    padding: 1rem 2rem;
+
+.wordColor{
+    color: rgb(201, 108, 22);
 }
 
 
 
 
-/* .active{
-    display: block
-} */
+
+
+
 

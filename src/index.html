@@ -10,15 +10,18 @@
      <main> 
       <div id="div1" >
           <h1>IOU A Vowel!</h1>
-          <h2>The vowel quiz</h2>
+          <img height= "300px" src="DevelopingSpellingSkills.jpg">
+         
           <form method="post" id="name-form">
             <h3> Enter a username:</h3>
-            <input type="text" name="name">
+            <input id = "username" type="text" name="name" placeholder="username">
+            
             <input type="submit" >
           </form> 
+          <h2 id= "welcome"></h2>
 
-          <h3>After submitting your user name, play IOU A Vowel!</h3>
-          <button id="game" >Click Here to play</button>
+          <h3>Click button to take the quiz.</h3>
+          <button id="game" >Click here</button>
           
       </div>
         
@@ -26,16 +29,21 @@
 
         <div id ="div2" >
           <h1>Add the missing Vowel to complete the word.</h1>
+            <br><br>
             <div id = "questions">
             </div>
             <div>
+              <br><br>
               <button id="quiz-submit">Submit for grading</button>
              </div>    
        
-            <h1>Score:</h1>
+            <h1> Your Score:</h1>
             <div id="show_score">
             </div>  
+            <h3 id= "score-text"></h3>
+            <br><br>
             <button id = "final" >Play again</button>
+            
           
         </div>
 
